@@ -1,22 +1,30 @@
 <template>
     <div class="terminal-content" id="terminal-content">
         <BarComponent @closeTerminal="closeTerminal"></BarComponent>
-        <CommandsComponent></CommandsComponent>
+        <NavTerminalComponent></NavTerminalComponent>
+        <CommandsComponent v-if="m"></CommandsComponent>
     </div>
 </template>
 
 <script>
 import BarComponent from '@/components/bar.vue'
 import CommandsComponent from '@/components/commands.vue'
+import NavTerminalComponent from '@/components/nav-terminal.vue'
 export default {
     name : 'TerminalComponent',
     components: {
         BarComponent,
-        CommandsComponent
+        CommandsComponent,
+        NavTerminalComponent
     },
     methods : {
         closeTerminal(value){
             this.$emit('closeTerminal', value); // Reenviar el evento al padre
+        }
+    },
+    data(){
+        return{
+            m : false
         }
     }
 }
