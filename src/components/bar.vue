@@ -1,8 +1,9 @@
 <template>
     <div class="bar-content" id="bar-content">
         <div class="close" @click="closeTerminal"></div>
-        <div class="redirect"></div>
+        <div class="button_modal" @click="openModal"></div>
         <div class="info"></div>
+        
     </div>
 </template>
 
@@ -18,6 +19,9 @@ export default {
         closeTerminal(){
             this.showTerminal = false;
             this.$emit('closeTerminal', this.showTerminal);
+        },
+        openModal(){
+            this.$emit('openModal', true);
         }
     }
 }
@@ -34,12 +38,12 @@ export default {
     background-color: #61C554 !important;
 }
 
-.redirect{
+.button_modal{
     margin-left: 8px;
     background-color: #F2BF4E !important;
 }
 
-.close, .info , .redirect{
+.close, .info , .button_modal{
     display: inline-block;
     background-color: #E96A5E;
     height: 20px;
@@ -48,11 +52,11 @@ export default {
     transition: transform 0.2s ease;
 }
 
-.close:hover, .info:hover, .redirect:hover{
+.close:hover, .info:hover, .button_modal:hover{
     transform: scale(1.05);
 }
 
-.close:active, .info:active, .redirect:active{
+.close:active, .info:active, .button_modall:active{
     transform: scale(0.95);
 }
 </style>

@@ -1,11 +1,18 @@
 <template>
     <div class="nav-terminal" id="nav-terminal">
-        <pre class="banner">
-    ____                                _  
-  (|      \                   o        | | 
-   |       |  __,   _  _        _   | | 
- _|       |/    |  / |/ |  |   |/   |/  
- (/\___/ \_/|_/  |  |_/|_/|__/|__/
+        <pre class="banner">                                          
+
+$$\   $$\                                         $$\   $$\               
+$$ |  $$ |                                        \__|  $$ |              
+$$ |  $$ | $$$$$$\  $$$$$$$\   $$$$$$\  $$\   $$\ $$\ $$$$$$\    $$$$$$\  
+$$$$$$$$ |$$  __$$\ $$  __$$\ $$  __$$\ $$ |  $$ |$$ |\_$$  _|  $$  __$$\ 
+$$  __$$ |$$ /  $$ |$$ |  $$ |$$ /  $$ |$$ |  $$ |$$ |  $$ |    $$ /  $$ |
+$$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |$$\ $$ |  $$ |
+$$ |  $$ |\$$$$$$  |$$ |  $$ |\$$$$$$$ |\$$$$$$  |$$ |  \$$$$  |\$$$$$$  |
+\__|  \__| \______/ \__|  \__| \____$$ | \______/ \__|   \____/  \______/ 
+                              $$\   $$ |                                  
+                              \$$$$$$  |                                  
+                               \______/
         </pre>
         <div @keydown="handleKey" tabindex="0" ref="selectors" class="selectors" id="selectors">
             <p id="selector-1" style="color: #00BCF4;">> Biografia</p>
@@ -22,7 +29,7 @@ export default {
     name: 'NavTerminalComponent',
     methods: {
         handleKey(event) {
-            if (event.key === 'ArrowUp') {
+            if (event.key === 'ArrowUp' || event.key === ' ')  {
                 this.deleteLastSelection()
                 if (this.selected[0]) {
                     this.limitSelected(0, 4)
@@ -35,6 +42,24 @@ export default {
                     this.limitSelected(4, 0)
                 } else {
                     this.setSelected(1);
+                }
+            }else if (event.key === 'Enter'){
+                switch (this.lastSelected){
+                    case 0:
+                        console.log('Biografia');
+                        break;
+                    case 1:
+                        console.log('Especialidades');
+                        break;
+                    case 2:
+                        console.log('Proyectos');
+                        break;
+                    case 3:
+                        console.log('Contacto');
+                        break;
+                    case 4:
+                        this.$emit('CommandTerminal', false, true)
+                        break;
                 }
             }
         },
@@ -65,6 +90,9 @@ export default {
             this.selected[last] = false;
             this.selected[next] = true;
             this.lastSelected = next;
+        },
+        focusNavTerminal(){
+            this.$refs.selectors.focus();
         }
     },
     data() {
@@ -88,10 +116,11 @@ export default {
 }
 
 .banner {
-    font-size: 20px;
+    font-size: 10px;
     font-weight: bold;
-    margin-left: 15px;
+    margin-left: 20px;
     color: #352484;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .selectors {
@@ -104,6 +133,6 @@ export default {
 
 .selectors p {
     color: #5E77B5;
-    margin: 10px
+    margin: 0px 0px 8px 15px;
 }
 </style>

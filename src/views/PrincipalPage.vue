@@ -1,9 +1,9 @@
 <template>
-    <div class="principal-content" id="principal-content">
-        <div>
+    <div class="principal-content" id="principal-content" @click="focusTerminal">
+        <div class="terminal-content">
             <img v-if="showImage" src="@/assets/terminal.png" alt="Show" class="terminal-image" @click="ShowTerminal">
             <div v-if="showTerminal" class="terminal">
-                <TerminalComponent @closeTerminal="closeTerminal"></TerminalComponent>
+                <TerminalComponent @closeTerminal="closeTerminal" @openModal="openModal" ref="terminal"></TerminalComponent>
             </div>
         </div>
     </div>
@@ -13,24 +13,29 @@
 import TerminalComponent from "@/components/terminal.vue"
 export default {
     name: 'PrincipalPageView',
-    data(){
-        return{
+    data() {
+        return {
             showImage: false,
-            showTerminal: false,
+            showTerminal: false
         }
     },
     methods: {
-        ShowImageTerminal : function(){
+        ShowImageTerminal: function () {
             this.showImage = true;
         },
-        ShowTerminal : function(){
+        ShowTerminal: function () {
             this.showImage = false;
             this.showTerminal = true;
         },
-        closeTerminal(value){
-            if (!value){
+        closeTerminal(value) {
+            if (!value) {
                 this.showTerminal = false;
                 this.showImage = true;
+            }
+        },
+        focusTerminal() {
+            if (this.showTerminal) {
+                this.$refs.terminal.focusNavTerminal();
             }
         }
     },
@@ -45,23 +50,15 @@ export default {
 
 <style scoped>
 
-/* Estilos para las transiciones */
-.expand-enter-active, .expand-leave-active {
-    transition: transform 0.3s ease; /* Duración y efecto de la transición */
-}
-
-.expand-enter, .expand-leave-to {
-    transform: scale(0.5); /* Tamaño inicial para la entrada y final para la salida */
-}
-
 .principal-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
 }
 
 .terminal-image {
+    margin-top: -30px;
     height: 80px;
     cursor: pointer;
     transition: transform 0.2s ease;
