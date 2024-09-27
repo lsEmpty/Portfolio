@@ -1,16 +1,20 @@
 <template>
-    <div class="modal show" tabindex="-1" @click.self="$emit('close-modal')">
-        <div class="modal-dialog modal-dialog-centered">
+    <div class="modal show" @click.self="$emit('close-modal')">
+        <div class="modal-dialog">
             <div class="modal-content">
-                <p>content</p>
+                <ModalContentComponent></ModalContentComponent>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import ModalContentComponent from '@/components/modal-content.vue';
 export default {
-    name: 'ModalComponent'
+    name: 'ModalComponent',
+    components : {
+        ModalContentComponent
+    }
 };
 </script>
 
@@ -18,7 +22,8 @@ export default {
 .modal {
     display: block;
     /* Asegúrate de que el modal se muestre */
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #06171E80;
     /* Fondo semitransparente */
+    padding-top: 80px;
 }
 </style>

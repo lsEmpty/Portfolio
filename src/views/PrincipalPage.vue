@@ -2,9 +2,12 @@
     <div class="principal-content" id="principal-content" @click="focusTerminal">
         <div class="terminal-content">
             <img v-if="showImage" src="@/assets/terminal.png" alt="Show" class="terminal-image" @click="ShowTerminal">
-            <div v-if="showTerminal" class="terminal">
-                <TerminalComponent @closeTerminal="closeTerminal" @openModal="openModal" ref="terminal"></TerminalComponent>
-            </div>
+            <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+                <div v-if="showTerminal" class="terminal">
+                    <TerminalComponent @closeTerminal="closeTerminal" @openModal="openModal" ref="terminal">
+                    </TerminalComponent>
+                </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -30,13 +33,30 @@ export default {
         closeTerminal(value) {
             if (!value) {
                 this.showTerminal = false;
-                this.showImage = true;
             }
         },
         focusTerminal() {
             if (this.showTerminal) {
                 this.$refs.terminal.focusNavTerminal();
             }
+        },
+        beforeEnter(el) {
+            el.style.opacity = 0;
+        },
+        enter(el, done) {
+            // Para asegurar que el modal esté visible antes de hacer la transición
+            el.offsetHeight; // Trigger a reflow
+            el.style.transition = 'opacity 0.3s ease';
+            el.style.opacity = 1;
+            done();
+        },
+        leave(el, done) {
+            el.style.transition = 'opacity 0.3s ease';
+            el.style.opacity = 0;
+            setTimeout(() => {
+                done();
+                this.showImage = true;
+            }, 300); // El tiempo debe coincidir con la duración de la transición
         }
     },
     mounted() {
@@ -49,7 +69,6 @@ export default {
 </script>
 
 <style scoped>
-
 .principal-content {
     display: flex;
     justify-content: center;

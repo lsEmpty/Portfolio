@@ -112,14 +112,14 @@ export default {
     margin: 0;
     padding: 0;
     font-family: "Playpen Sans", cursive;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .banner {
-    font-size: 10px;
+    font-size: 8.5px;
     font-weight: bold;
     margin-left: 20px;
-    color: #352484;
+    color: #3871BA;
     font-family: 'Courier New', Courier, monospace;
 }
 

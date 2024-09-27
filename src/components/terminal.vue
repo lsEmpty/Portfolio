@@ -29,7 +29,7 @@ export default {
             this.$emit('closeTerminal', value); // Reenviar el evento al padre
         },
         focusNavTerminal() {
-            if (this.showNavTerminal) {
+            if (this.showNavTerminal && !this.showModal) {
                 this.$refs.navterminal.focusNavTerminal();
             }
         },
@@ -43,16 +43,16 @@ export default {
         enter(el, done) {
             // Para asegurar que el modal esté visible antes de hacer la transición
             el.offsetHeight; // Trigger a reflow
-            el.style.transition = 'opacity 0.5s ease';
+            el.style.transition = 'opacity 0.3s ease';
             el.style.opacity = 1;
             done();
         },
         leave(el, done) {
-            el.style.transition = 'opacity 0.5s ease';
+            el.style.transition = 'opacity 0.3s ease';
             el.style.opacity = 0;
             setTimeout(() => {
                 done();
-            }, 500); // El tiempo debe coincidir con la duración de la transición
+            }, 300); // El tiempo debe coincidir con la duración de la transición
         },
         openModal(value) {
             this.showModal = value;
