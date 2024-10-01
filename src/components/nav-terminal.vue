@@ -15,10 +15,10 @@ $$ |  $$ |\$$$$$$  |$$ |  $$ |\$$$$$$$ |\$$$$$$  |$$ |  \$$$$  |\$$$$$$  |
                                \______/
         </pre>
         <div @keydown="handleKey" tabindex="0" ref="selectors" class="selectors" id="selectors">
-            <p id="selector-1" style="color: #00BCF4;">> Biografia</p>
-            <p id="selector-2">Especialidades</p>
-            <p id="selector-3">Proyectos</p>
-            <p id="selector-4">Contacto</p>
+            <p id="selector-1" style="color: #00BCF4;">> Biography</p>
+            <p id="selector-2">Specialties</p>
+            <p id="selector-3">Projects</p>
+            <p id="selector-4">Contact</p>
             <p id="selector-5">Terminal</p>
         </div>
     </div>
@@ -44,22 +44,16 @@ export default {
                     this.setSelected(1);
                 }
             }else if (event.key === 'Enter'){
-                switch (this.lastSelected){
-                    case 0:
-                        console.log('Biografia');
-                        break;
-                    case 1:
-                        console.log('Especialidades');
-                        break;
-                    case 2:
-                        console.log('Proyectos');
-                        break;
-                    case 3:
-                        console.log('Contacto');
-                        break;
-                    case 4:
-                        this.$emit('CommandTerminal', false, true)
-                        break;
+                let selectedEmit = []
+                this.selected.forEach((element, index)=> {
+                    if (index != this.selected.length - 1) {
+                        selectedEmit.push(element)
+                    }
+                });
+                if (this.lastSelected < 4) {
+                    this.$emit('showItemProfile', selectedEmit);
+                }else{
+                    this.$emit('CommandTerminal', false, true)
                 }
             }
         },
@@ -93,6 +87,9 @@ export default {
         },
         focusNavTerminal(){
             this.$refs.selectors.focus();
+        },
+        removeFocusNavTerminal(){
+            this.$refs.selectors.blur();
         }
     },
     data() {

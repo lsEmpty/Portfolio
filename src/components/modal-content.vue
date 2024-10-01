@@ -30,16 +30,16 @@ export default {
             this.lastAppendChild = []; // Limpia el ultimo AppendChild ya que se rellenará nuevamente
             let contador = 0; // Contador para los CommandsItems
             let contadorExtraImages = -1; // Contador para los ExtraImages
+            // Condicion para colocar el titulo de los CommandItems
+            if (CommandItems != 0) {
+                let tituloTerminal = document.createElement("p");
+                tituloTerminal.className = "titulo";
+                tituloTerminal.textContent = "Terminal Commands";
+                contenido.appendChild(tituloTerminal);
+                this.lastAppendChild.push(tituloTerminal);
+            }
             // ForEach para recorrer los items que se van a colocar
             this.searchText.forEach(element => {
-                // Condicion para colocar el titulo de los CommandItems
-                if (contador == 0) {
-                    let tituloTerminal = document.createElement("p");
-                    tituloTerminal.className = "titulo";
-                    tituloTerminal.textContent = "Terminal";
-                    contenido.appendChild(tituloTerminal);
-                    this.lastAppendChild.push(tituloTerminal);
-                }
                 // Crea un div para cada item que se va a colocar
                 const div_contenido = document.createElement('div');
                 // Cada que se itera el searchText se ejecutará esto en el primer item para darle un pointToDiv
@@ -229,7 +229,7 @@ export default {
 }
 
 
-/* Estilos para el scrollbar en WebKit (Chrome, Safari) */
+/* Estilos para el scrollbar en WebKit */
 .content::-webkit-scrollbar {
     width: 12px;
 }

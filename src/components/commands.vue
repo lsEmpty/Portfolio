@@ -29,7 +29,7 @@ export default {
                 this.output.push(`<span style="color: #853693;">></span><span style="color: #fdff90;"> ${command}</span>`);
                 const terminal = document.getElementById('terminal');
                 terminal.style.overflowY = 'auto';
-                this.commands(command, terminal);
+                this.commands(command.toLowerCase(), terminal);
                 this.$nextTick(() => {
                     const inputField = this.$refs.inputField;
                     if (inputField) {
@@ -68,33 +68,42 @@ export default {
             }
         },
         commands(command, terminal) {
-            if (command == 'clear') {
-                terminal.style.overflowY = 'unset';
-                this.output = [];
-            } else if (command == 'cls') {
-                terminal.style.overflowY = 'unset';
-                this.output = [];
-            } else if (command == 'navegator') {
-                this.$emit('NavegatorTerminal', true, false);
-            } else if(command == 'exit'){
-                this.$emit('ExitTerminal', false);
-            } else {
-                this.errorCommand(command);
+            switch (command) {
+                case 'discord':
+                    this.output.push(`<i class="bi bi-discord" style="color: #5865F2;"></i> <span style="color:#5865F2;">Discord: formateado</span>`);
+                    break;
+                case 'clear':
+                    terminal.style.overflowY = 'unset';
+                    this.output = [];
+                    break;
+                case 'cls':
+                    terminal.style.overflowY = 'unset';
+                    this.output = [];
+                    break;
+                case 'navegator':
+                    this.$emit('NavegatorTerminal', true, false);
+                    break;
+                case 'exit':
+                    this.$emit('ExitTerminal', false);
+                    break;
+                default:
+                    this.errorCommand(command);
+                    break;
             }
         },
-        // Methods defined in the console
-        errorCommand(command){
+        // Methods defined in the 
+        errorCommand(command) {
             let words = command.split('');
-                let initCommand = "";
-                let flag = true;
-                words.forEach(element => {
-                    if (element != ' ' && flag){
-                        initCommand += element;
-                    }else {
-                        flag = false;
-                    }
-                });
-                this.output.push(`<span style="color:#E96A5E;">${initCommand}: The term '${initCommand}' is not recognized as the name of an executable function.<br>Check the spelling of the name and try again.</span>`);
+            let initCommand = "";
+            let flag = true;
+            words.forEach(element => {
+                if (element != ' ' && flag) {
+                    initCommand += element;
+                } else {
+                    flag = false;
+                }
+            });
+            this.output.push(`<span style="color:#E96A5E;">${initCommand}: The term '${initCommand}' is not recognized as the name of an executable function.<br>Check the spelling of the name and try again.</span>`);
         }
     }
 }
@@ -130,5 +139,10 @@ export default {
     font-family: "Playpen Sans", cursive;
     font-size: 17px;
     font-optical-sizing: auto;
+}
+
+/* Estilos para el scrollbar en WebKit */
+.terminal::-webkit-scrollbar {
+    width: 0px;
 }
 </style>

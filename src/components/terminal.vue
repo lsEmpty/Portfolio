@@ -4,7 +4,7 @@
             <ModalComponent v-if="showModal" @close-modal="showModal = false" />
         </transition>
         <BarComponent @closeTerminal="closeTerminal" @openModal="openModal"></BarComponent>
-        <NavTerminalComponent v-if="showNavTerminal" ref="navterminal" @CommandTerminal="OpenTerminal">
+        <NavTerminalComponent v-if="showNavTerminal" ref="navterminal" @showItemProfile="showItemProfile" @CommandTerminal="OpenTerminal">
         </NavTerminalComponent>
         <CommandsComponent v-if="showCommandTerminal" @NavegatorTerminal="OpenTerminal" @ExitTerminal="closeTerminal">
         </CommandsComponent>
@@ -33,6 +33,9 @@ export default {
                 this.$refs.navterminal.focusNavTerminal();
             }
         },
+        removeFocusNavTerminal() {
+            this.$refs.navterminal.removeFocusNavTerminal();
+        },
         OpenTerminal(navegator, command) {
             this.showNavTerminal = navegator;
             this.showCommandTerminal = command;
@@ -55,14 +58,50 @@ export default {
             }, 300); // El tiempo debe coincidir con la duración de la transición
         },
         openModal(value) {
-            this.showModal = value;
+            if (!this.inProfileComponent){
+                this.showModal = value;
+            }
+        },
+        handleKeyDown(event) {
+            this.keysPressed[event.key] = true;
+            if (this.keysPressed['Control'] && this.keysPressed['m']) {
+                this.openModal(!this.showModal);
+                if (!this.showModal) {
+                    this.focusNavTerminal();
+                }
+            }else if (this.keysPressed['Control'] && this.keysPressed['x']) {
+                this.closeTerminal(false);
+            }else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                event.preventDefault();
+            } 
+        },
+        handleKeyUp(event) {
+            this.keysPressed[event.key] = false;
+        },
+        showItemProfile(values){
+            this.$emit('showItemProfile', values);
         }
     },
     data() {
         return {
             showNavTerminal: true,
             showCommandTerminal: false,
-            showModal: false
+            showModal: false,
+            keysPressed: {}
+        }
+    },
+    mounted() {
+        window.addEventListener('keydown', this.handleKeyDown);
+        window.addEventListener('keyup', this.handleKeyUp);
+    },
+    beforeUnmount() {  // Se usa en lugar de beforeDestroy
+        window.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('keyup', this.handleKeyUp);
+    },
+    props: {
+        inProfileComponent: {
+            type: Boolean,
+            request: true
         }
     }
 }
@@ -71,7 +110,7 @@ export default {
 
 <style scoped>
 .terminal-content {
-    margin-top: 52px;
+    margin-top: 34px;
     margin-bottom: 65px;
     width: 130vh;
     height: 80vh;

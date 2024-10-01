@@ -24,6 +24,6 @@ export default {
     /* Asegúrate de que el modal se muestre */
     background-color: #06171E80;
     /* Fondo semitransparente */
-    padding-top: 80px;
+    padding-top: 100px;
 }
 </style>
