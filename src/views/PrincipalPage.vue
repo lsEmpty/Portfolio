@@ -10,7 +10,7 @@
                 <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                     <div v-if="showTerminal" class="terminal">
                         <TerminalComponent :inProfileComponent="inProfileComponent" @closeTerminal="closeTerminal"
-                            @showItemProfile="showItemProfile" @openModal="openModal" ref="terminal">
+                            @showItemProfile="showItemProfile" ref="terminal">
                         </TerminalComponent>
                     </div>
                 </transition>

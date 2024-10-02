@@ -21,8 +21,8 @@ export default{
     bottom : 0;
     right: 0;
     border-radius: 50%;
-    border:13px solid blue;
-    background-color: blue;
+    border:13px solid #1D265D;
+    background-color: #1D265D;
     margin: 0px 30px 30px 0px;
     transition: transform 0.2s ease;
 }
