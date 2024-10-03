@@ -66,7 +66,7 @@ export default {
             this.keysPressed[event.key] = true;
             if (this.keysPressed['Control'] && this.keysPressed['m']) {
                 this.openModal(!this.showModal);
-                if (!this.showModal) {
+                if (!this.inProfileComponent) {
                     this.focusNavTerminal();
                 }
             }else if (this.keysPressed['Control'] && this.keysPressed['x']) {

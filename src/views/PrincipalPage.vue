@@ -17,7 +17,7 @@
             </div>
             <!-- Componente que mostrará un mensaje de guia -->
             <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <RedirectMessage v-if="showTerminal"></RedirectMessage>
+                <RedirectMessage v-if="showGuieMessage"></RedirectMessage>
             </transition>
         </div>
         <!-- Div que mostrará cada una de los profile items -->
@@ -55,7 +55,8 @@ export default {
             showTerminal: false, //Dependiendo de esta variable se mostrará o no la terminal
             inProfileComponent: false, //Variable que estará en true si se está en un profile component, en caso de presionar el ButtonUp para subir a la terminal se colocará en false
             section: 'secondary', //Variable que cambiará si se presiona el ButtonUp para subir a la terminal, en caso de ser presionado cambiará a 'principal'
-            showProfileComponents: [false, false, false, false] //Lista que cambiará cada profile según el indice que se seleccione en el nav terminal
+            showProfileComponents: [false, false, false, false], //Lista que cambiará cada profile según el indice que se seleccione en el nav terminal
+            showGuieMessage: false, //Dependiendo de esta variable se mostrará o no el GuieMessage
         }
     },
     methods: {
@@ -67,6 +68,7 @@ export default {
         ShowTerminal: function () {
             this.showImage = false;
             this.showTerminal = true;
+            this.showGuieMessage = true;
         },
         // Function que recibe un $emit, se cierra la terminal y se cierran todos los ProfileComponents
         closeTerminal(value) {
@@ -116,12 +118,14 @@ export default {
             if (section == 'secondary') {
                 // Scroll down
                 this.ScrollToComponent("SecondarySection");
+                this.showGuieMessage = false;
                 this.inProfileComponent = true; // Como se encuentra en un ProfileComponent se asigna a true
             } else if (section == 'principal') { // Se acciona cuando se ejecuta el botón de ButtonUp
                 // Scroll up
                 this.section = section;
                 this.ScrollToComponent("PrincipalSection");
                 this.section = 'secondary';
+                this.showGuieMessage = true;
                 this.inProfileComponent = false; // Como se encuentra en la section de la terminal inProfileComponent pasa a ser falso
             }
         },
@@ -153,6 +157,11 @@ export default {
                 // Cuando se encuentre en un Prifile Item se removerá el focus que tiene el nav-terminal para no poder modificar la terminal desde ahí
                 this.removeFocusTerminal()
                 this.SectionsScroll(this.section);
+            }
+
+            // En caso de que no se muestre la terminal retirar el mensaje de guia Ctrl + M
+            if (!this.showTerminal) {
+                this.showGuieMessage = false;
             }
         }
     },
