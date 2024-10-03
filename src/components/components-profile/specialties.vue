@@ -6,14 +6,13 @@
             <h2>Backend Development Stack with Java</h2>
             <div class="content-stacks">
                 <div class="item"><img src="@/assets/logo_java.png" alt="" style="width: 40px; height: 37px;"><p> Java</p></div>
-                <div class="item"><img src="@/assets/logo_hibernate.png" alt=""><p> JPA - H</p></div>
                 <div class="item"><img src="@/assets/logo_springboot.png" alt="" style="width: 40px; height: 37px;"><p> Spring Boot</p></div>
-                <div class="item"><img src="@/assets/logo_mysql.png" alt="" style="border-radius: 5px;"><p> MySQL</p></div>
+                <div class="item"><img src="@/assets/logo_hibernate.png" alt=""><p> JPA - H</p></div>
+                <div class="item"><img src="@/assets/logo_mysql_sinfondo.png" alt=""><p> MySQL</p></div>
             </div>
             <h2>Other Technical Skills</h2>
             <div class="content-stacks">
                 <div class="item"><img src="@/assets/logo_vue.png" alt=""><p> VUE</p></div>
-                <div class="item"><img src="@/assets/logo_github.png" alt=""><p> GitHub</p></div>
                 <div class="item"><img src="@/assets/logo_git.png" alt=""><p> Git</p></div>
             </div>
         </div>

@@ -8,13 +8,22 @@
                 <div class="content-header-info">
                     <h1 class="tittle">Honguito</h1>
                     <p class="secondary-tittle">Java Backend Developer</p>
-                    <button type="button" class="btn btn-download-cv" @click="downloadCV">Download CV <i class="bi bi-download"></i></button>
+                    <div>
+                        <button type="button" class="btn btn-download-cv" @click="downloadCV" style="margin-right: 15px;">Download CV <i
+                                class="bi bi-download"></i></button>
+                        <button type="button" class="btn btn-email" @click="copyEmail" id="btn-email">danielxh794@gmail.com <i
+                                class="bi bi-envelope-at-fill"></i></button>
+                    </div>
                 </div>
             </header>
             <section>
                 <h2 class="about-me">About me 🙄</h2>
-                <p class="content-about-me">Hello, I'm Daniel Hernández, generally I'm constantly learning things, my route as a programmer is focused more on the Backend, since I'm not good at design and I haven't been interested in it, in itself I like the logic part of a program more.</p>
-                <p class="content-about-me">I am currently studying Spring Security to have a larger job opportunity, it is also very easy for me to adapt, see that my focus is not the Front-End and I made this portfolio.</p>
+                <p class="content-about-me">Hello, I'm Daniel Hernández, generally I'm constantly learning things, my
+                    route as a programmer is focused more on the Backend, since I'm not good at design and I haven't
+                    been interested in it, in itself I like the logic part of a program more.</p>
+                <p class="content-about-me">I am currently studying Spring Security to have a larger job opportunity, it
+                    is also very easy for me to adapt, see that my focus is not the Front-End and I made this portfolio.
+                </p>
                 <p class="content-about-me">Remember that a programmer does not program solve problems.</p>
             </section>
         </div>
@@ -25,12 +34,31 @@
 <script>
 export default {
     name: "BiographyComponent",
-    methods : {
+    methods: {
         downloadCV() {
             const link = document.createElement("a");
             link.href = "/cv.pdf";
             link.download = "cv_honguito.pdf";
             link.click();
+        },
+        copyEmail(){
+            const email = "danielxh794@gmail.com";
+            const btn_email = document.getElementById("btn-email");
+            navigator.clipboard.writeText(email)
+            .then(() => {
+                btn_email.innerHTML = `Copied!! <i class="bi bi-clipboard2-check-fill"></i>`;
+                setTimeout(() => {
+                    btn_email.innerHTML = `danielxh794@gmail.com <i
+                                class="bi bi-envelope-at-fill"></i>`;
+                }, 2000);
+            })
+            .catch(() => {
+                btn_email.innerHTML = `Failed Copy!! <i class="bi bi-clipboard-x-fill"></i>`;
+                setTimeout(() => {
+                    btn_email.innerHTML = `danielxh794@gmail.com <i
+                                class="bi bi-envelope-at-fill"></i>`;
+                }, 2000);
+            });
         }
     }
 }
@@ -49,7 +77,7 @@ export default {
     background-size: cover;
 }
 
-.content-profile{
+.content-profile {
     margin-left: auto;
     margin-right: auto;
     width: 700px;
@@ -57,13 +85,13 @@ export default {
 }
 
 .content-profile header {
-    display: flex;             
+    display: flex;
     align-items: center;
     padding-bottom: 40px;
     border-bottom: #1d265d dashed 2px;
 }
 
-.photo-container{
+.photo-container {
     width: 130px;
     height: 150px;
     overflow: hidden;
@@ -71,7 +99,7 @@ export default {
     margin-right: 20px;
 }
 
-.photo{
+.photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -80,26 +108,43 @@ export default {
     padding-left: 10px;
 }
 
-.tittle{
+.tittle {
     font-size: 50px;
 }
 
-.secondary-tittle{
+.secondary-tittle {
     font-size: 20px;
     color: #dad9d9;
 }
 
-.content-header-info{
-    display: flex;              
+.content-header-info {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.btn-email {
+    font-size: 14px;
+    background-color: #E96A9D;
+    color: white;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 .btn-download-cv {
     font-size: 14px;
     background-color: #5ABA81;
-    color: white;              
+    color: white;
     transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-email:hover {
+    background-color: #E96A9DCC;
+    opacity: 0.9;
+}
+
+.btn-email:hover {
+    background-color: #E96A9D99;
+    opacity: 1;
 }
 
 .btn-download-cv:hover {
@@ -109,15 +154,15 @@ export default {
 
 .btn-download-cv:active {
     background-color: rgba(90, 186, 129, 0.6);
-    opacity: 1; 
+    opacity: 1;
 }
 
-.about-me{
+.about-me {
     margin: 20px 0px;
     font-size: 32px;
 }
 
-.content-about-me{
+.content-about-me {
     font-size: 17.7px;
     margin: 20px 0px;
     color: #dad9d9;

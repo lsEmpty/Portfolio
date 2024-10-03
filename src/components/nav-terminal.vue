@@ -18,8 +18,7 @@ $$ |  $$ |\$$$$$$  |$$ |  $$ |\$$$$$$$ |\$$$$$$  |$$ |  \$$$$  |\$$$$$$  |
             <p id="selector-1" style="color: #00BCF4;">> Biography</p>
             <p id="selector-2">Specialties</p>
             <p id="selector-3">Projects</p>
-            <p id="selector-4">Contact</p>
-            <p id="selector-5">Terminal</p>
+            <p id="selector-4">Terminal</p>
         </div>
     </div>
 </template>
@@ -32,14 +31,14 @@ export default {
             if (event.key === 'ArrowUp' || event.key === ' ')  {
                 this.deleteLastSelection()
                 if (this.selected[0]) {
-                    this.limitSelected(0, 4)
+                    this.limitSelected(0, 3)
                 } else {
                     this.setSelected(0);
                 }
             } else if (event.key === 'ArrowDown') {
                 this.deleteLastSelection()
-                if (this.selected[4]) {
-                    this.limitSelected(4, 0)
+                if (this.selected[3]) {
+                    this.limitSelected(3, 0)
                 } else {
                     this.setSelected(1);
                 }
@@ -50,7 +49,7 @@ export default {
                         selectedEmit.push(element)
                     }
                 });
-                if (this.lastSelected < 4) {
+                if (this.lastSelected < 3) {
                     this.$emit('showItemProfile', selectedEmit);
                 }else{
                     this.$emit('CommandTerminal', false, true)
@@ -94,7 +93,7 @@ export default {
     },
     data() {
         return {
-            selected: [true, false, false, false, false],
+            selected: [true, false, false, false],
             lastSelected: 0
         }
     },

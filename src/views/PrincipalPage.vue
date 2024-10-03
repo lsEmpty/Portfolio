@@ -25,7 +25,6 @@
             <BiographyComponent v-if="showProfileComponents[0]"></BiographyComponent>
             <SpecialtiesComponent v-if="showProfileComponents[1]"></SpecialtiesComponent>
             <ProjectsComponent v-if="showProfileComponents[2]"></ProjectsComponent>
-            <ContactComponent v-if="showProfileComponents[3]"></ContactComponent>
             <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <ButtonUpComponent v-if="inProfileComponent" @clickButtonUp="SectionsScroll"></ButtonUpComponent>
             </transition>
@@ -42,7 +41,6 @@ import RedirectMessage from "@/components/guie-message.vue";
 import BiographyComponent from "@/components/components-profile/biography.vue";
 import SpecialtiesComponent from "@/components/components-profile/specialties.vue";
 import ProjectsComponent from "@/components/components-profile/projects.vue";
-import ContactComponent from "@/components/components-profile/contact.vue";
 
 /* Button Profile Components*/
 import ButtonUpComponent from "@/components/components-profile/button-up.vue";
@@ -55,7 +53,7 @@ export default {
             showTerminal: false, //Dependiendo de esta variable se mostrará o no la terminal
             inProfileComponent: false, //Variable que estará en true si se está en un profile component, en caso de presionar el ButtonUp para subir a la terminal se colocará en false
             section: 'secondary', //Variable que cambiará si se presiona el ButtonUp para subir a la terminal, en caso de ser presionado cambiará a 'principal'
-            showProfileComponents: [false, false, false, false], //Lista que cambiará cada profile según el indice que se seleccione en el nav terminal
+            showProfileComponents: [false, false, false], //Lista que cambiará cada profile según el indice que se seleccione en el nav terminal
             showGuieMessage: false, //Dependiendo de esta variable se mostrará o no el GuieMessage
         }
     },
@@ -74,7 +72,7 @@ export default {
         closeTerminal(value) {
             if (!value) {
                 this.showTerminal = false;
-                this.showProfileComponents = [false, false, false, false];
+                this.showProfileComponents = [false, false, false];
             }
         },
         // Function que hace focus a la terminal tomando la ref y haciendo el focus
@@ -153,7 +151,7 @@ export default {
             });
             // Esta condicional se coloca para evitar un error del updated ya que se ejecuta de forma indeceada, 
             // es para verificar que se haya seleccionado algún item de nav-terminal 
-            if (acumulador != 4 && this.section == 'secondary') {
+            if (acumulador != 3 && this.section == 'secondary') {
                 // Cuando se encuentre en un Prifile Item se removerá el focus que tiene el nav-terminal para no poder modificar la terminal desde ahí
                 this.removeFocusTerminal()
                 this.SectionsScroll(this.section);
@@ -174,7 +172,6 @@ export default {
         BiographyComponent,
         SpecialtiesComponent,
         ProjectsComponent,
-        ContactComponent,
         ButtonUpComponent
     },
     updated() {
