@@ -37,7 +37,7 @@ export default {
     methods: {
         downloadCV() {
             const link = document.createElement("a");
-            link.href = "/cv.pdf";
+            link.href = "cv.pdf";
             link.download = "cv_honguito.pdf";
             link.click();
         },
