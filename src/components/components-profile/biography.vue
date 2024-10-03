@@ -36,10 +36,7 @@ export default {
     name: "BiographyComponent",
     methods: {
         downloadCV() {
-            const link = document.createElement("a");
-            link.href = "cv.pdf";
-            link.download = "cv_honguito.pdf";
-            link.click();
+            window.open("cv.pdf", "_blank");
         },
         copyEmail(){
             const email = "danielxh794@gmail.com";
