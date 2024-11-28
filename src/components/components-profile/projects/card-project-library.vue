@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card" style="width: 35rem; height: 24rem;">
+        <div class="card" style="width: 35rem;">
             <img src="@/assets/project_library_image.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Library Project</h5>

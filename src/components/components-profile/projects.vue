@@ -7,6 +7,7 @@
                 <div class="projects">
                     <PetsComponent v-if="showProjects[0]"></PetsComponent>
                     <LibraryComponent v-if="showProjects[1]"></LibraryComponent>
+                    <QuestionsComponent v-if="showProjects[2]"></QuestionsComponent>
                 </div>
                 <p class="button" @click="handleRightClick"><i class="bi bi-arrow-right-square-fill"></i></p>
             </div>
@@ -17,11 +18,13 @@
 <script>
 import LibraryComponent from "@/components/components-profile/projects/card-project-library.vue"
 import PetsComponent from "@/components/components-profile/projects/card-project-pets.vue"
+import QuestionsComponent from "@/components/components-profile/projects/card-project-questions.vue"
 export default {
     name: 'ProjectsComponent',
     components: {
         LibraryComponent,
-        PetsComponent
+        PetsComponent,
+        QuestionsComponent
     },
     methods : {
         handleLeftClick() {
@@ -49,7 +52,7 @@ export default {
     },
     data() {
         return {
-            showProjects : [true, false],
+            showProjects : [true, false, false],
             lastProject : 0
         }
     }

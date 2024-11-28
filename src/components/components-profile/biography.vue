@@ -18,7 +18,7 @@
             </header>
             <section>
                 <h2 class="about-me">About me 🙄</h2>
-                <p class="content-about-me">Hello, I'm Daniel Hernández, generally I'm constantly learning things, my
+                <p class="content-about-me">Hello, I'm Daniel Hernández, I'm constantly learning things, my
                     route as a programmer is focused more on the Backend, since I'm not good at design and I haven't
                     been interested in it, in itself I like the logic part of a program more.</p>
                 <p class="content-about-me">I am currently studying Spring Security to have a larger job opportunity, it
@@ -36,10 +36,7 @@ export default {
     name: "BiographyComponent",
     methods: {
         downloadCV() {
-            const link = document.createElement("a");
-            link.href = "cv.pdf";
-            link.download = "cv_honguito.pdf";
-            link.click();
+            window.open("cv.pdf", "_blank");
         },
         copyEmail(){
             const email = "danielxh794@gmail.com";
